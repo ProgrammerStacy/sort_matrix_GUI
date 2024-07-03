@@ -8,14 +8,12 @@ MainWindow::MainWindow(QWidget *parent)
     wgt = new QWidget();
     setCentralWidget(wgt);
 
-    rowItem = 0;
-    columnItem = 0;
     inputSize = new QLineEdit;
     bSize = new QPushButton;
 
 
     connect(bSize, SIGNAL(clicked()), this, SLOT(bSize_clicked()));
-    connect(bNum, SIGNAL(clicked()), this, SLOT(bNum_clicked()));
+
 
     first = new QHBoxLayout(wgt);
     left = new QVBoxLayout;
@@ -32,7 +30,7 @@ MainWindow::~MainWindow()
 }
 void MainWindow::bSize_clicked()
 {
-    int n = inputSize->text().toInt();
+    n = inputSize->text().toInt();
     inputTable = new QTableWidget(n, n);
     left->addWidget(inputTable);
     leftBottom = new QHBoxLayout;
@@ -42,40 +40,44 @@ void MainWindow::bSize_clicked()
     leftBottom->addWidget(inputNum);
     leftBottom->addWidget(bNum);
     mtrx = new Matrix(n);
+    connect(bNum, SIGNAL(clicked()), this, SLOT(bNum_clicked()));
 }
 void MainWindow::bNum_clicked()
 {
 
-    if (rowItem <= inputTable->rowCount())
+    QTableWidgetItem* temp = new QTableWidgetItem;
+    QString s;
+    for (int i = 0; i < n; i++)
     {
-        QTableWidgetItem* temp = new QTableWidgetItem;
-        temp->setText(inputNum->text());
-        inputTable->setItem(rowItem, columnItem, temp);
-        mtrx->inputmatr_qt(rowItem, columnItem, inputNum->text().toInt());
-        if (rowItem == inputTable->rowCount())
+        for (int j  = 0; j < n; j++)
         {
-            mtrx->sort_matr();
-            mtrx->obnulenie();
-            fill_outputTable();
+            if (inputTable->item(i,j) != 0)
+            {
+                temp = inputTable->item(i,j);
+                mtrx->inputmatr_qt(i, j, temp->text().toInt());
+
+            }
         }
-        rowItem++;
-        columnItem++;
-        delete temp;
     }
+    delete temp;
+    mtrx->sort_matr();
+    mtrx->obnulenie();
+    fill_outputTable();
+
+
 
 }
 void MainWindow::fill_outputTable()
 {
-    outputTable = new QTableWidget(rowItem, columnItem);
+    outputTable = new QTableWidget(n, n);
     QTableWidgetItem* temp = new QTableWidgetItem;
-    for (int i = 0; i <= rowItem; i++)
+    for (int i = 0; i < n; i++)
     {
-        for (int j  = 0; j <= columnItem; j++)
+        for (int j  = 0; j < n; j++)
         {
-            temp->setText(QString::number(mtrx->outputmatr_qt(i, j)));
-            outputTable->setItem(i,j, temp);
+            outputTable->setItem(i,j, new QTableWidgetItem(QString::number(mtrx->outputmatr_qt(i, j))));
         }
     }
-    outputTable->show();
+    first->addWidget(outputTable);
     delete temp;
 }

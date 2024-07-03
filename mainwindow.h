@@ -11,6 +11,7 @@
 #include <QTableWidgetItem>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QString>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -27,8 +28,7 @@ public:
     void fill_outputTable();
 
 private:
-    int rowItem;
-    int columnItem;
+    int n;
     Ui::MainWindow *ui;
     QWidget* wgt;
     QHBoxLayout* first;
