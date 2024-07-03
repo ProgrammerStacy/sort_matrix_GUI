@@ -5,17 +5,26 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    wgt = new QWidget();
+    setCentralWidget(wgt);
+
     rowItem = 0;
     columnItem = 0;
     inputSize = new QLineEdit;
-    inputNum = new QLineEdit;
     bSize = new QPushButton;
-    bNum = new QPushButton;
+
+
     connect(bSize, SIGNAL(clicked()), this, SLOT(bSize_clicked()));
     connect(bNum, SIGNAL(clicked()), this, SLOT(bNum_clicked()));
-    inputNum->show();
-    bSize->show();
-    bNum-> show();
+
+    first = new QHBoxLayout(wgt);
+    left = new QVBoxLayout;
+    first->addLayout(left);
+    leftTop = new QHBoxLayout;
+    left->addLayout(leftTop);
+    leftTop->addWidget(inputSize);
+    leftTop->addWidget(bSize);
+    wgt->show();
 }
 MainWindow::~MainWindow()
 {
@@ -25,7 +34,13 @@ void MainWindow::bSize_clicked()
 {
     int n = inputSize->text().toInt();
     inputTable = new QTableWidget(n, n);
-    inputTable->show();
+    left->addWidget(inputTable);
+    leftBottom = new QHBoxLayout;
+    left->addLayout(leftBottom);
+    bNum = new QPushButton;
+    inputNum = new QLineEdit;
+    leftBottom->addWidget(inputNum);
+    leftBottom->addWidget(bNum);
     mtrx = new Matrix(n);
 }
 void MainWindow::bNum_clicked()

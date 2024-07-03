@@ -9,6 +9,8 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QTableWidgetItem>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -28,6 +30,11 @@ private:
     int rowItem;
     int columnItem;
     Ui::MainWindow *ui;
+    QWidget* wgt;
+    QHBoxLayout* first;
+    QVBoxLayout* left;
+    QHBoxLayout* leftTop;
+    QHBoxLayout* leftBottom;
     QLineEdit* inputSize;
     QLineEdit* inputNum;
     QPushButton* bSize;
