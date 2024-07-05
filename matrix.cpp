@@ -45,7 +45,7 @@ void Matrix::inputmatr_qt(int i, int j, int temp)
     *(*(a + i) + j) = temp;
 
 }
-int Matrix::outputmatr_qt(int i, int j)
+int Matrix::outputmatr_qt(int i, int j) const
 {
     return *(*(a + i) + j);
 }
@@ -119,7 +119,7 @@ void Matrix::obnulenie() // по условию, все что находитс�
         }
     }
 }
-void Matrix::outputmatr()
+void Matrix::outputmatr() const
 {
     int i, j;
     for (i = 0; i < str; i++) {

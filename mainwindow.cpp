@@ -7,22 +7,27 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     wgt = new QWidget();
     setCentralWidget(wgt);
+    first = new QHBoxLayout(wgt);
+    left = new QVBoxLayout;
+    leftTop = new QHBoxLayout;
+    first->addLayout(left);
+
+
+    welcomeText = new QLabel;
+    welcomeText->setText("Введите размер таблицы:");
+    left->addWidget(welcomeText);
 
     inputSize = new QLineEdit;
     bSize = new QPushButton;
+    bSize->setText("Ок");
 
-
-    connect(bSize, SIGNAL(clicked()), this, SLOT(bSize_clicked()));
-
-
-    first = new QHBoxLayout(wgt);
-    left = new QVBoxLayout;
-    first->addLayout(left);
-    leftTop = new QHBoxLayout;
     left->addLayout(leftTop);
     leftTop->addWidget(inputSize);
     leftTop->addWidget(bSize);
+
     wgt->show();
+
+    connect(bSize, SIGNAL(clicked()), this, SLOT(bSize_clicked()));
 }
 MainWindow::~MainWindow()
 {
@@ -30,15 +35,20 @@ MainWindow::~MainWindow()
 }
 void MainWindow::bSize_clicked()
 {
+    nextText = new QLabel;
+    nextText->setText("Заполните таблицу целыми числами: ");
+    left->addWidget(nextText);
     n = inputSize->text().toInt();
     inputTable = new QTableWidget(n, n);
     left->addWidget(inputTable);
+
     leftBottom = new QHBoxLayout;
     left->addLayout(leftBottom);
+
     bNum = new QPushButton;
-    inputNum = new QLineEdit;
-    leftBottom->addWidget(inputNum);
+    bNum->setText("Ок");
     leftBottom->addWidget(bNum);
+
     mtrx = new Matrix(n);
     connect(bNum, SIGNAL(clicked()), this, SLOT(bNum_clicked()));
 }
@@ -57,6 +67,7 @@ void MainWindow::bNum_clicked()
                 mtrx->inputmatr_qt(i, j, temp->text().toInt());
 
             }
+
         }
     }
     delete temp;

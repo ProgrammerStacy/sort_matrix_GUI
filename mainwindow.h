@@ -1,3 +1,4 @@
+#pragma once
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -35,8 +36,10 @@ private:
     QVBoxLayout* left;
     QHBoxLayout* leftTop;
     QHBoxLayout* leftBottom;
+    QLabel* welcomeText;
+    QLabel* nextText;
+    QLabel* warningText;
     QLineEdit* inputSize;
-    QLineEdit* inputNum;
     QPushButton* bSize;
     QPushButton* bNum;
     QTableWidget* inputTable;
