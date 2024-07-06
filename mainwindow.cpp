@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -11,7 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
     left = new QVBoxLayout;
     leftTop = new QHBoxLayout;
     first->addLayout(left);
-
 
     welcomeText = new QLabel;
     welcomeText->setText("Введите размер таблицы:");
@@ -36,7 +37,7 @@ MainWindow::~MainWindow()
 void MainWindow::bSize_clicked()
 {
     nextText = new QLabel;
-    nextText->setText("Заполните таблицу целыми числами: ");
+    nextText->setText("Заполните таблицу целыми неповторяющимися числами: ");
     left->addWidget(nextText);
     n = inputSize->text().toInt();
     inputTable = new QTableWidget(n, n);
@@ -64,8 +65,29 @@ void MainWindow::bNum_clicked()
             if (inputTable->item(i,j) != 0)
             {
                 temp = inputTable->item(i,j);
-                mtrx->inputmatr_qt(i, j, temp->text().toInt());
-
+                s = temp->text();
+                if (stringIsNum(s))
+                {
+                mtrx->inputmatr_qt(i, j, s.toInt());
+                }
+                else
+                {
+                    QMessageBox wrongValue;
+                    wrongValue.setText("Таблица должна быть заполнена только целыми числами!");
+                    wrongValue.setIcon(QMessageBox::Critical);
+                    wrongValue.exec();
+                    delete temp;
+                    return;
+                }
+            }
+            else
+            {
+                QMessageBox wrongValue;
+                wrongValue.setText("Все ячейки таблицы должны быть заполнены!");
+                wrongValue.setIcon(QMessageBox::Critical);
+                wrongValue.exec();
+                delete temp;
+                return;
             }
 
         }
@@ -91,4 +113,13 @@ void MainWindow::fill_outputTable()
     }
     first->addWidget(outputTable);
     delete temp;
+}
+bool MainWindow::stringIsNum(QString s) const
+{
+    int n = s.size();
+    for (int i = 0; i < n; ++i)
+    {
+        if (!s[i].isDigit()) return false;
+    }
+    return true;
 }

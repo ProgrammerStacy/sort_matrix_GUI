@@ -13,6 +13,8 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QString>
+#include <QMessageBox>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -27,9 +29,11 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void fill_outputTable();
+    bool stringIsNum(QString) const;
 
 private:
     int n;
+
     Ui::MainWindow *ui;
     QWidget* wgt;
     QHBoxLayout* first;
@@ -38,7 +42,6 @@ private:
     QHBoxLayout* leftBottom;
     QLabel* welcomeText;
     QLabel* nextText;
-    QLabel* warningText;
     QLineEdit* inputSize;
     QPushButton* bSize;
     QPushButton* bNum;
