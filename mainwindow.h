@@ -15,6 +15,7 @@
 #include <QString>
 #include <QMessageBox>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -36,9 +37,10 @@ private:
 
     Ui::MainWindow *ui;
     QWidget* wgt;
-    QHBoxLayout* first;
+    QVBoxLayout* first;
     QVBoxLayout* left;
-    QHBoxLayout* leftTop;
+    QHBoxLayout* firstTop;
+    QHBoxLayout* firstDown;
     QHBoxLayout* leftBottom;
     QLabel* welcomeText;
     QLabel* nextText;

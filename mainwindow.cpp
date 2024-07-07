@@ -9,22 +9,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     wgt = new QWidget();
     setCentralWidget(wgt);
-    first = new QHBoxLayout(wgt);
+    first = new QVBoxLayout(wgt);
+    firstTop = new QHBoxLayout();
+    firstDown = new QHBoxLayout();
     left = new QVBoxLayout;
-    leftTop = new QHBoxLayout;
-    first->addLayout(left);
-
-    welcomeText = new QLabel;
-    welcomeText->setText("Введите размер таблицы:");
-    left->addWidget(welcomeText);
-
     inputSize = new QLineEdit;
     bSize = new QPushButton;
-    bSize->setText("Ок");
+    welcomeText = new QLabel;
 
-    left->addLayout(leftTop);
-    leftTop->addWidget(inputSize);
-    leftTop->addWidget(bSize);
+    first->addLayout(firstTop);
+    first->addLayout(firstDown);
+    firstDown->addLayout(left);
+    welcomeText->setText("Введите размер таблицы:");
+    first->insertWidget(0, welcomeText);
+    bSize->setText("Ок");
+    firstTop->addWidget(inputSize);
+    firstTop->addWidget(bSize);
 
     wgt->show();
 
@@ -38,8 +38,9 @@ void MainWindow::bSize_clicked()
 {
     nextText = new QLabel;
     nextText->setText("Заполните таблицу целыми неповторяющимися числами: ");
-    left->addWidget(nextText);
+    first->insertWidget(2, nextText);
     n = inputSize->text().toInt();
+
     inputTable = new QTableWidget(n, n);
     left->addWidget(inputTable);
 
@@ -52,10 +53,11 @@ void MainWindow::bSize_clicked()
 
     mtrx = new Matrix(n);
     connect(bNum, SIGNAL(clicked()), this, SLOT(bNum_clicked()));
+    bSize->setEnabled(false);
+
 }
 void MainWindow::bNum_clicked()
 {
-
     QTableWidgetItem* temp = new QTableWidgetItem;
     QString s;
     for (int i = 0; i < n; i++)
@@ -68,10 +70,11 @@ void MainWindow::bNum_clicked()
                 s = temp->text();
                 if (stringIsNum(s))
                 {
-                mtrx->inputmatr_qt(i, j, s.toInt());
+                    mtrx->inputmatr_qt(i, j, s.toInt());
                 }
                 else
                 {
+
                     QMessageBox wrongValue;
                     wrongValue.setText("Таблица должна быть заполнена только целыми числами!");
                     wrongValue.setIcon(QMessageBox::Critical);
@@ -93,12 +96,10 @@ void MainWindow::bNum_clicked()
         }
     }
     delete temp;
+    bNum->setEnabled(false);
     mtrx->sort_matr();
     mtrx->obnulenie();
     fill_outputTable();
-
-
-
 }
 void MainWindow::fill_outputTable()
 {
@@ -111,7 +112,7 @@ void MainWindow::fill_outputTable()
             outputTable->setItem(i,j, new QTableWidgetItem(QString::number(mtrx->outputmatr_qt(i, j))));
         }
     }
-    first->addWidget(outputTable);
+    firstDown->addWidget(outputTable);
     delete temp;
 }
 bool MainWindow::stringIsNum(QString s) const
