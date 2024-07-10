@@ -6,7 +6,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
     ui->setupUi(this);
+    this->setWindowTitle("Сортировка матрицы");
     wgt = new QWidget();
     setCentralWidget(wgt);
     first = new QVBoxLayout(wgt);
@@ -33,6 +35,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete mtrx;
 }
 void MainWindow::bSize_clicked()
 {

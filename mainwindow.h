@@ -1,6 +1,6 @@
-#pragma once
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include "Matrix.h"
@@ -14,6 +14,7 @@
 #include <QVBoxLayout>
 #include <QString>
 #include <QMessageBox>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -34,7 +35,6 @@ public:
 
 private:
     int n;
-
     Ui::MainWindow *ui;
     QWidget* wgt;
     QVBoxLayout* first;

@@ -50,17 +50,17 @@ int Matrix::outputmatr_qt(int i, int j) const
     return *(*(a + i) + j);
 }
 //сортировка элементов массива по возрастанию методом выбора минимума
-void Matrix::sort_vibor(tstr a, int n)
+void Matrix::sort_vibor(tstr line, int n)
 {
     int k, imin;
     telem z;
     for (int i = 0; i < str - 1; i++) {
         imin = i;		//поиск очередного минимума
-        for (int k = i + 1; k < n; k++) if (a[k] < a[imin]) imin = k;
+        for (int k = i + 1; k < n; k++) if (line[k] < line[imin]) imin = k;
         //перестановка элементов
-        z = a[i];
-        a[i] = a[imin];
-        a[imin] = z;
+        z = line[i];
+        line[i] = line[imin];
+        line[imin] = z;
     }
 }
 void Matrix::sort_matr() //ограничение области сортировки происходит за счет

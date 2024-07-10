@@ -1,8 +1,8 @@
-#pragma once
 
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#pragma once
 
 #include <iostream>
 using namespace std;
@@ -21,7 +21,7 @@ public:
     void inputmatr_qt(int, int, int);
     int outputmatr_qt(int, int) const;
     void outputmatr() const;
-    void sort_vibor(tstr a, int n);
+    void sort_vibor(tstr, int);
     void sort_matr();
     void obnulenie();
 
