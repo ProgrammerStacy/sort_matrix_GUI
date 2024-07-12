@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/p">
+        <file>SortArea</file>
+    </qresource>
+</RCC>

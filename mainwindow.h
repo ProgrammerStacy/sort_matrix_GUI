@@ -2,19 +2,15 @@
 #define MAINWINDOW_H
 #pragma once
 
-#include "Matrix.h"
 #include <QMainWindow>
 #include <QWidget>
-#include <QLineEdit>
 #include <QTableWidget>
 #include <QLabel>
 #include <QPushButton>
-#include <QTableWidgetItem>
+#include <QLineEdit>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include <QString>
-#include <QMessageBox>
-
+#include "Matrix.h"
 
 
 QT_BEGIN_NAMESPACE
@@ -39,11 +35,13 @@ private:
     QWidget* wgt;
     QVBoxLayout* first;
     QVBoxLayout* left;
+    QVBoxLayout* right;
     QHBoxLayout* firstTop;
     QHBoxLayout* firstDown;
     QHBoxLayout* leftBottom;
     QLabel* welcomeText;
     QLabel* nextText;
+    QLabel* image;
     QLineEdit* inputSize;
     QPushButton* bSize;
     QPushButton* bNum;
