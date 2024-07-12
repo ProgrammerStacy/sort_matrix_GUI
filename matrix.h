@@ -4,8 +4,6 @@
 
 #pragma once
 
-#include <iostream>
-using namespace std;
 typedef int telem;
 typedef telem* tstr;
 typedef tstr* tmatr;

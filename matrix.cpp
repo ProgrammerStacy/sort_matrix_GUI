@@ -1,4 +1,5 @@
 #include "Matrix.h"
+#include <iostream>
 
 Matrix::Matrix() //конструктор без аргументов
 {
@@ -31,13 +32,24 @@ Matrix::~Matrix() //деструктор
 }
 void Matrix::inputmatr()
 {
-    cout << " Enter the elements line by line separated by spaces" << endl;
-    cout << " two-dimensional array of size " << str << "x" << str << endl;
-    cout << " After entering the line, press <Enter>" << endl;
+    std::cout << " Enter the elements line by line separated by spaces" << std::endl;
+    std::cout << " two-dimensional array of size " << str << "x" << str << std::endl;
+    std::cout << " After entering the line, press <Enter>" << std::endl;
     for (int i = 0; i < str; i++){
-        cout << " ";
+        std::cout << " ";
         for (int j = 0; j < str; j++)
-            cin >> *(*(a + i) + j);
+            std::cin >> *(*(a + i) + j);
+    }
+}
+void Matrix::outputmatr() const
+{
+    int i, j;
+    for (i = 0; i < str; i++) {
+        for (j = 0; j < str; j++) {
+            std::cout.width(2); // ширина поля для выводимого параметра
+            std::cout << *(*(a + i) + j) << ' ';
+        }
+        std::cout << '\n';
     }
 }
 void Matrix::inputmatr_qt(int i, int j, int temp)
@@ -119,14 +131,4 @@ void Matrix::obnulenie() // по условию, все что находитс�
         }
     }
 }
-void Matrix::outputmatr() const
-{
-    int i, j;
-    for (i = 0; i < str; i++) {
-        for (j = 0; j < str; j++) {
-            cout.width(2); // ширина поля для выводимого параметра
-            cout << *(*(a + i) + j) << ' ';
-        }
-        cout << '\n';
-    }
-}
+

@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 #pragma once
 
-#include <QMainWindow>
 #include "Matrix.h"
+#include <QMainWindow>
 #include <QWidget>
 #include <QLineEdit>
 #include <QTableWidget>

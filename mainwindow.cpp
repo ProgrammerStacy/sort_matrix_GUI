@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     first->addLayout(firstTop);
     first->addLayout(firstDown);
     firstDown->addLayout(left);
-    welcomeText->setText("Введите размер таблицы:");
+    welcomeText->setText("Введите размер квадратной таблицы:");
     first->insertWidget(0, welcomeText);
     bSize->setText("Ок");
     firstTop->addWidget(inputSize);
@@ -35,29 +35,33 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-    delete mtrx;
+
 }
 void MainWindow::bSize_clicked()
 {
     nextText = new QLabel;
+    n = inputSize->text().toInt();
+    if (n % 2 != 0)
+    {
+        QMessageBox wrongValue;
+        wrongValue.setText("Таблица должна быть квадратная. Введите четное число!");
+        wrongValue.setIcon(QMessageBox::Critical);
+        wrongValue.exec();
+        return;
+    }
     nextText->setText("Заполните таблицу целыми неповторяющимися числами: ");
     first->insertWidget(2, nextText);
-    n = inputSize->text().toInt();
-
     inputTable = new QTableWidget(n, n);
     left->addWidget(inputTable);
-
     leftBottom = new QHBoxLayout;
     left->addLayout(leftBottom);
-
     bNum = new QPushButton;
     bNum->setText("Ок");
     leftBottom->addWidget(bNum);
-
     mtrx = new Matrix(n);
+
     connect(bNum, SIGNAL(clicked()), this, SLOT(bNum_clicked()));
     bSize->setEnabled(false);
-
 }
 void MainWindow::bNum_clicked()
 {
@@ -117,6 +121,7 @@ void MainWindow::fill_outputTable()
     }
     firstDown->addWidget(outputTable);
     delete temp;
+    delete mtrx;
 }
 bool MainWindow::stringIsNum(QString s) const
 {
